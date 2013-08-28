@@ -6,7 +6,6 @@ public class AIFighter extends Fighter {
 
 	public AIFighter(Nation nation, int id, FightingClass fclass, int level) {
 		super(nation, id, fclass, level);
-		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -15,18 +15,10 @@ public class Fighter {
 	private int y;
 	
 	public Fighter(Nation nation, int id, FightingClass fclass, int level) {
-		this.setNation(nation);
-		this.setId(id);
+		this.nation = nation;
+		this.id = id;
 		this.fclass = fclass;
 		this.level = level;
-	}
-	
-	public FightingClass getFightingClass() {
-		return fclass;
-	}
-
-	public void setFightingClass(FightingClass fclass) {
-		this.fclass = fclass;
 	}
 
 	public int getLevel() {
@@ -35,22 +27,6 @@ public class Fighter {
 
 	public void setLevel(int level) {
 		this.level = level;
-	}
-
-	public Nation getNation() {
-		return nation;
-	}
-
-	public void setNation(Nation nation) {
-		this.nation = nation;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public void updatepos(int ix, int iy) {
@@ -73,14 +49,33 @@ public class Fighter {
 	}
 	
 	private void buildnorman(int x, int y) {
-		//build code here
+		switch (fclass) {
+			case WARRIOR:
+				
+			case ARCHER:
+				
+		}
 	}
 	
 	private void buildsaxon(int x, int y) {
-		//build code here
+		switch (fclass) {
+			case WARRIOR: {
+				
+			}
+			case ARCHER: {
+				
+			}
+		}
 	}
 
 	private void buildviking(int x, int y) {
-		//build code here
+		switch (fclass) {
+			case WARRIOR: {
+				
+			}
+			case ARCHER: {
+				
+			}
+		}
 	}
 }
