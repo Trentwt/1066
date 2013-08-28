@@ -1,13 +1,15 @@
-package com.trippylizard.tensixtysix;
+package com.trippylizard.tensixtysix.fighter;
 
-public class Player {
+import com.trippylizard.tensixtysix.Nation;
+
+public class Fighter {
 	
 	Nation nation;
 	int id;
 	FightingClass fclass;
 	int level;
 	
-	public Player(Nation nation, int id, FightingClass fclass, int level) {
+	public Fighter(Nation nation, int id, FightingClass fclass, int level) {
 		this.setNation(nation);
 		this.setId(id);
 		this.fclass = fclass;
