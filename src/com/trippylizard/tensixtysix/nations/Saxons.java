@@ -9,8 +9,6 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
-import com.trippylizard.tensixtysix.Nation;
-
 public class Saxons extends Nation {
 
 	private static String desc_saxons = "insert saxon poetry here :D";

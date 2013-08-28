@@ -9,8 +9,6 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
-import com.trippylizard.tensixtysix.Nation;
-
 public class Vikings extends Nation {
 
 	private static String desc_vikings = "insert viking poetry here :D";

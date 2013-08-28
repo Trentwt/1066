@@ -1,6 +1,6 @@
 package com.trippylizard.tensixtysix.fighter;
 
-import com.trippylizard.tensixtysix.Nation;
+import com.trippylizard.tensixtysix.nations.Nation;
 
 public class AIFighter extends Fighter {
 

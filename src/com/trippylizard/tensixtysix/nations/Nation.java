@@ -1,12 +1,8 @@
-package com.trippylizard.tensixtysix;
+package com.trippylizard.tensixtysix.nations;
 
 import java.awt.Color;
 
 import org.newdawn.slick.opengl.Texture;
-
-import com.trippylizard.tensixtysix.nations.Normans;
-import com.trippylizard.tensixtysix.nations.Saxons;
-import com.trippylizard.tensixtysix.nations.Vikings;
 
 public class Nation {
 	
