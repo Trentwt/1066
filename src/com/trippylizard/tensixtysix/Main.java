@@ -4,7 +4,6 @@ import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,12 +14,11 @@ import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.WaveData;
 import org.newdawn.slick.util.ResourceLoader;
 
 import com.trippylizard.tensixtysix.fighter.Fighter;
-import com.trippylizard.tensixtysix.fighter.Fighter.FightingClass;
-import com.trippylizard.tensixtysix.fighter.HumanFighter;
 import com.trippylizard.tensixtysix.nations.Normans;
 
 public class Main {
@@ -57,6 +55,19 @@ public class Main {
 		
 		playMenuMusic();
 		
+		int trianglelist = glGenLists(1);
+		
+		glNewList(trianglelist, GL_COMPILE);
+			glBegin(GL_TRIANGLES);
+				GL11.glColor3f(1.0f, 0f, 0f);
+				glVertex2i(100, 100);
+				GL11.glColor3f(0f, 1.0f, 0f);
+				glVertex2i(WIDTH - 100, 100);
+				GL11.glColor3f(0f, 0f, 1.0f);
+				glVertex2i(HEIGHT - 100, WIDTH / 2);
+			glEnd();
+		glEndList();
+		
 		Normans.construct();
 		
 		while (!Display.isCloseRequested()) {
@@ -90,16 +101,13 @@ public class Main {
 				f.build(gen.nextInt(), gen.nextInt());
 			}
 			
-			glBegin(GL_TRIANGLES);
-				glVertex2i(100, 100);
-				glVertex2i(WIDTH - 100, 100);
-				glVertex2i(HEIGHT - 100, WIDTH / 2);
-			glEnd();
+			glCallList(trianglelist);
 			
 			Display.update();
 			Display.sync(120);
 		}
 		
+		glDeleteLists(trianglelist, 1);
 		alDeleteBuffers(albuffer);
 		AL.destroy();
 		Display.destroy();

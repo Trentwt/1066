@@ -9,6 +9,9 @@ public class Fighter {
 	FightingClass fclass;
 	int level;
 	
+	private int x;
+	private int y;
+	
 	public Fighter(Nation nation, int id, FightingClass fclass, int level) {
 		this.setNation(nation);
 		this.setId(id);
@@ -46,6 +49,11 @@ public class Fighter {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public void updatepos(int ix, int iy) {
+		this.x += ix;
+		this.y += iy;
 	}
 	
 	public enum FightingClass {
