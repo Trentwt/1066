@@ -4,6 +4,7 @@ import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -12,6 +13,8 @@ import org.lwjgl.openal.AL10;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.WaveData;
+
+import com.trippylizard.tensixtysix.nations.Normans;
 
 public class Main {
 
@@ -42,6 +45,8 @@ public class Main {
 		glMatrixMode(GL_MODELVIEW);
 		
 		playMenuMusic();
+		
+		Normans.construct();
 		
 		while (!Display.isCloseRequested()) {
 			//Render Code
