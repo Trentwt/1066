@@ -16,11 +16,11 @@ public class Fighter {
 		this.level = level;
 	}
 	
-	public FightingClass getFclass() {
+	public FightingClass getFightingClass() {
 		return fclass;
 	}
 
-	public void setFightningClass(FightingClass fclass) {
+	public void setFightingClass(FightingClass fclass) {
 		this.fclass = fclass;
 	}
 
@@ -50,5 +50,27 @@ public class Fighter {
 	
 	public enum FightingClass {
 		WARRIOR, ARCHER;
+	}
+	
+	public void build(int x, int y) {
+		if (nation.equals(Nation.NORMANS)) {
+			buildnorman(x, y);
+		} else if (nation.equals(Nation.SAXONS)) {
+			buildsaxon(x, y);
+		} else if (nation.equals(Nation.VIKINGS)) {
+			buildviking(x, y);
+		}
+	}
+	
+	private void buildnorman(int x, int y) {
+		//build code here
+	}
+	
+	private void buildsaxon(int x, int y) {
+		//build code here
+	}
+
+	private void buildviking(int x, int y) {
+		//build code here
 	}
 }

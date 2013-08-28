@@ -5,6 +5,9 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -13,7 +16,11 @@ import org.lwjgl.openal.AL10;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.WaveData;
+import org.newdawn.slick.util.ResourceLoader;
 
+import com.trippylizard.tensixtysix.fighter.Fighter;
+import com.trippylizard.tensixtysix.fighter.Fighter.FightingClass;
+import com.trippylizard.tensixtysix.fighter.HumanFighter;
 import com.trippylizard.tensixtysix.nations.Normans;
 
 public class Main {
@@ -25,6 +32,8 @@ public class Main {
 	int menuthemesource;
 	
 	boolean musicon = true;
+	
+	private static final List<Fighter> fighters = new ArrayList<Fighter>();
 	
 	public Main() {
 		try {
@@ -43,6 +52,8 @@ public class Main {
 		glLoadIdentity();
 		glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
+		
+		System.out.println(glGetString(GL_VERSION));
 		
 		playMenuMusic();
 		
@@ -74,6 +85,11 @@ public class Main {
 				}
 			}
 			
+			for (final Fighter f : fighters) {
+				Random gen = new Random();
+				f.build(gen.nextInt(), gen.nextInt());
+			}
+			
 			glBegin(GL_TRIANGLES);
 				glVertex2i(100, 100);
 				glVertex2i(WIDTH - 100, 100);
@@ -95,7 +111,7 @@ public class Main {
 	}
 	
 	private void playMenuMusic() {
-		BufferedInputStream stream = new BufferedInputStream(this.getClass().getResourceAsStream("theme.wav"));
+		BufferedInputStream stream = new BufferedInputStream(ResourceLoader.getResourceAsStream("res/theme.wav"));
 		WaveData data = WaveData.create(stream);
 		albuffer = alGenBuffers();
 		alBufferData(albuffer, data.format, data.data, data.samplerate);
