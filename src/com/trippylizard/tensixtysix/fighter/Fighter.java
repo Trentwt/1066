@@ -9,7 +9,9 @@ public class Fighter {
 	FightingClass fclass;
 	int level;
 	
+	@SuppressWarnings("unused")
 	private int x;
+	@SuppressWarnings("unused")
 	private int y;
 	
 	public Fighter(Nation nation, int id, FightingClass fclass, int level) {
