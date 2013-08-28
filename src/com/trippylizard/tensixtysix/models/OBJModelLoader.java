@@ -36,6 +36,7 @@ public class OBJModelLoader {
 				m.faces.add(new Face(vertexIndices, normalIndices));
 			}
 		}
+		reader.close();
 		return m;
 	}
 }

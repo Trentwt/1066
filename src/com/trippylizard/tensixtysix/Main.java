@@ -4,6 +4,9 @@ import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,10 +19,16 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.WaveData;
+import org.lwjgl.util.glu.GLU;
+import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.util.ResourceLoader;
 
 import com.trippylizard.tensixtysix.fighter.Fighter;
+import com.trippylizard.tensixtysix.models.Face;
+import com.trippylizard.tensixtysix.models.Model;
+import com.trippylizard.tensixtysix.models.OBJModelLoader;
 import com.trippylizard.tensixtysix.nations.Normans;
+import com.trippylizard.tensixtysix.utils.StreamUtils;
 
 public class Main {
 
@@ -41,14 +50,12 @@ public class Main {
 			AL.create();
 		} catch (LWJGLException ex) {
 			ex.printStackTrace();
-			Display.destroy();
-			AL.destroy();
-			System.exit(1);
+			closeall();
 		}
 		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
+		glOrtho(0, WIDTH, HEIGHT, 0, -1, 1);
 		glMatrixMode(GL_MODELVIEW);
 		
 		System.out.println(glGetString(GL_VERSION));
@@ -67,6 +74,36 @@ public class Main {
 				glVertex2i(HEIGHT - 100, WIDTH / 2);
 			glEnd();
 		glEndList();
+		
+		int testObjectList = glGenLists(1);
+		glNewList(testObjectList, GL_COMPILE);
+			Model m = null;
+			try {
+				m = OBJModelLoader.loadModel(StreamUtils.streamToFile(ResourceLoader.getResourceAsStream("res/OpenGL Monkey.obj")));
+			} catch (IOException e) {
+				e.printStackTrace();
+				glDeleteLists(trianglelist, 1);
+				alDeleteBuffers(albuffer);
+				closeall();
+			}
+			glBegin(GL_TRIANGLES);
+				for (Face f : m.faces) {
+					Vector3f n1 = m.normals.get((int) f.normal.x - 1);
+					glNormal3f(n1.x, n1.y, n1.z);
+					Vector3f v1 = m.vertices.get((int) f.vertex.x - 1);
+					glVertex3f(v1.x, v1.y, v1.z);
+					Vector3f n2 = m.normals.get((int) f.normal.y - 1);
+					glNormal3f(n2.x, n2.y, n2.z);
+					Vector3f v2 = m.vertices.get((int) f.vertex.y - 1);
+					glVertex3f(v2.x, v2.y, v2.z);
+					Vector3f n3 = m.normals.get((int) f.normal.z - 1);
+					glNormal3f(n3.x, n3.y, n3.z);
+					Vector3f v3 = m.vertices.get((int) f.vertex.z - 1);
+					glVertex3f(v3.x, v3.y, v3.z);
+				}
+			glEnd();
+		glEndList();
+		
 		
 		Normans.construct();
 		
@@ -107,11 +144,10 @@ public class Main {
 			Display.sync(120);
 		}
 		
+		glDeleteLists(testObjectList, 1);
 		glDeleteLists(trianglelist, 1);
 		alDeleteBuffers(albuffer);
-		AL.destroy();
-		Display.destroy();
-		System.exit(0);
+		closeall();
 	}
 	
 	public static void main(String[] args) {
@@ -129,6 +165,12 @@ public class Main {
 		alSourcef(menuthemesource, AL_BUFFER, albuffer);
 		
 		alSourcePlay(menuthemesource);
+	}
+	
+	private void closeall() {
+		AL.destroy();
+		Display.destroy();
+		System.exit(0);
 	}
 
 }
