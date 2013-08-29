@@ -3,26 +3,20 @@ package com.trippylizard.tensixtysix;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.opengl.GL11.*;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.openal.AL;
-import org.lwjgl.openal.AL10;
+import org.lwjgl.openal.*;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.WaveData;
-import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.util.ResourceLoader;
 
 import com.trippylizard.tensixtysix.fighter.Fighter;
 import com.trippylizard.tensixtysix.models.*;
-import com.trippylizard.tensixtysix.nations.Normans;
+import com.trippylizard.tensixtysix.nations.*;
 import com.trippylizard.tensixtysix.utils.StreamUtils;
 
 public class Main {
@@ -61,11 +55,11 @@ public class Main {
 		
 		glNewList(trianglelist, GL_COMPILE);
 			glBegin(GL_TRIANGLES);
-				GL11.glColor3f(1.0f, 0f, 0f);
+				glColor3f(1.0f, 0f, 0f);
 				glVertex2i(100, 100);
-				GL11.glColor3f(0f, 1.0f, 0f);
+				glColor3f(0f, 1.0f, 0f);
 				glVertex2i(WIDTH - 100, 100);
-				GL11.glColor3f(0f, 0f, 1.0f);
+				glColor3f(0f, 0f, 1.0f);
 				glVertex2i(HEIGHT - 100, WIDTH / 2);
 			glEnd();
 		glEndList();
@@ -82,20 +76,7 @@ public class Main {
 				closeall();
 			}
 			glBegin(GL_TRIANGLES);
-				for (Face f : m.faces) {
-					Vector3f n1 = m.normals.get((int) f.normal.x - 1);
-					glNormal3f(n1.x, n1.y, n1.z);
-					Vector3f v1 = m.vertices.get((int) f.vertex.x - 1);
-					glVertex3f(v1.x, v1.y, v1.z);
-					Vector3f n2 = m.normals.get((int) f.normal.y - 1);
-					glNormal3f(n2.x, n2.y, n2.z);
-					Vector3f v2 = m.vertices.get((int) f.vertex.y - 1);
-					glVertex3f(v2.x, v2.y, v2.z);
-					Vector3f n3 = m.normals.get((int) f.normal.z - 1);
-					glNormal3f(n3.x, n3.y, n3.z);
-					Vector3f v3 = m.vertices.get((int) f.vertex.z - 1);
-					glVertex3f(v3.x, v3.y, v3.z);
-				}
+				OBJModelLoader.renderModel(m);
 			glEnd();
 		glEndList();
 		
@@ -167,5 +148,4 @@ public class Main {
 		Display.destroy();
 		System.exit(0);
 	}
-
 }

@@ -29,7 +29,7 @@ public class Fighter {
 		this.level = level;
 	}
 	
-	public void updatepos(int ix, int iy) {
+	public void updateposition(int ix, int iy) {
 		this.x += ix;
 		this.y += iy;
 	}
@@ -50,10 +50,12 @@ public class Fighter {
 	
 	private void buildnorman(int x, int y) {
 		switch (fclass) {
-			case WARRIOR:
+			case WARRIOR: {
 				
-			case ARCHER:
+			}
+			case ARCHER: {
 				
+			}
 		}
 	}
 	
