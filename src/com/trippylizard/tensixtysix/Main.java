@@ -3,6 +3,9 @@ package com.trippylizard.tensixtysix;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.opengl.GL11.*;
 
+import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.*;
 import java.util.*;
 
@@ -14,6 +17,7 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.WaveData;
 import org.newdawn.slick.util.ResourceLoader;
 
+import com.apple.eawt.Application;
 import com.trippylizard.tensixtysix.fighter.Fighter;
 import com.trippylizard.tensixtysix.models.*;
 import com.trippylizard.tensixtysix.nations.*;
@@ -131,6 +135,7 @@ public class Main {
 	}
 	
 	private void playMenuMusic() {
+		
 		BufferedInputStream stream = new BufferedInputStream(ResourceLoader.getResourceAsStream("res/theme.wav"));
 		WaveData data = WaveData.create(stream);
 		albuffer = alGenBuffers();
