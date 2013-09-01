@@ -35,6 +35,8 @@ public class Main {
 	
 	int customnationsize = 6;
 	
+	Map map;
+	
 	public Main() {
 		try {
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
@@ -51,6 +53,13 @@ public class Main {
 		glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 		
+		try {
+			map = new Map(OBJModelLoader.loadModel(StreamUtils.streamToFile(ResourceLoader.getResourceAsStream("res/Car.obj"))));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			closeall();
+		}
+		
 		System.out.println(glGetString(GL_VERSION));
 		
 		playMenuMusic();
@@ -58,9 +67,9 @@ public class Main {
 		int trianglelist = glGenLists(1);
 		
 		for(int i = 0; i < customnationsize; i++){
-			fighters.add(new Fighter(Nation.NORMANS, fightercount++ + 1, FighterClass.WARRIOR, 1));
-			fighters.add(new Fighter(Nation.SAXONS, fightercount++ + 1, FighterClass.WARRIOR, 1));
-			fighters.add(new Fighter(Nation.VIKINGS, fightercount++ + 1, FighterClass.WARRIOR, 1));
+			fighters.add(new Fighter(Nation.NORMANS, (fightercount++) + 1, FighterClass.WARRIOR, 1));
+			fighters.add(new Fighter(Nation.SAXONS, (fightercount++) + 1, FighterClass.WARRIOR, 1));
+			fighters.add(new Fighter(Nation.VIKINGS, (fightercount++) + 1, FighterClass.WARRIOR, 1));
 		}
 		
 		glNewList(trianglelist, GL_COMPILE);
@@ -118,10 +127,9 @@ public class Main {
 			}
 			
 			for (final Fighter f : fighters) {
-				Random gen = new Random();
 				if (!f.isCreated()) {
-					f.build(gen.nextInt(), gen.nextInt());
-					System.out.println(f.getNation() + " " + f.getFighterClass() + " has spawned at " + f.getX() + "," + f.getY() + " with the id " + f.getID());
+					f.build(random((int) Math.floor(map.getMapLength()), 0), random((int) Math.floor(map.getMapWidth()), 0));
+					System.out.println(f.getNation() + " " + f.getFighterClass() + " has spawned at " + f.getX() + "," + f.getZ() + " with the id " + f.getID());
 				}
 			}
 			
@@ -159,5 +167,9 @@ public class Main {
 		AL.destroy();
 		Display.destroy();
 		System.exit(0);
+	}
+	
+	public int random(int max, int min) {
+		return min + (int)(Math.random() * ((max - min) + 1));
 	}
 }

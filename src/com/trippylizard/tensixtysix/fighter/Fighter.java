@@ -12,7 +12,7 @@ public class Fighter {
 	boolean isCreated = false;
 	
 	private int x;
-	private int y;
+	private int z;
 	
 	public Fighter(Nation nation, int id, FighterClass fclass, int level) {
 		this.nation = nation;
@@ -45,39 +45,39 @@ public class Fighter {
 		return x;
 	}
 	
-	public int getY() {
-		return y;
+	public int getZ() {
+		return z;
 	}
 	
 	public boolean isCreated() {
 		return isCreated;
 	}
 	
-	public void updateposition(int ix, int iy) {
+	public void updateposition(int ix, int iz) {
 		this.x += ix;
-		this.y += iy;
+		this.z += iz;
 	}
 	
 	public enum FighterClass {
 		WARRIOR, ARCHER;
 	}
 	
-	public void build(int x, int y) {
+	public void build(int x, int z) {
 		this.x = x;
-		this.y = y;
+		this.z = z;
 		
 		if (nation.equals(Nation.NORMANS)) {
-			buildnorman(x, y);
+			buildnorman(x, z);
 		} else if (nation.equals(Nation.SAXONS)) {
-			buildsaxon(x, y);
+			buildsaxon(x, z);
 		} else if (nation.equals(Nation.VIKINGS)) {
-			buildviking(x, y);
+			buildviking(x, z);
 		}
 		
 		isCreated = true;
 	}
 	
-	private void buildnorman(int x, int y) {
+	private void buildnorman(int x, int z) {
 		switch (fclass) {
 			case WARRIOR: {
 				
