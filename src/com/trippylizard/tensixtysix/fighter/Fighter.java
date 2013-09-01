@@ -6,15 +6,15 @@ public class Fighter {
 	
 	Nation nation;
 	int id;
-	FightingClass fclass;
+	FighterClass fclass;
 	int level;
 	
-	@SuppressWarnings("unused")
+	boolean isCreated = false;
+	
 	private int x;
-	@SuppressWarnings("unused")
 	private int y;
 	
-	public Fighter(Nation nation, int id, FightingClass fclass, int level) {
+	public Fighter(Nation nation, int id, FighterClass fclass, int level) {
 		this.nation = nation;
 		this.id = id;
 		this.fclass = fclass;
@@ -29,16 +29,43 @@ public class Fighter {
 		this.level = level;
 	}
 	
+	public int getID() {
+		return id;
+	}
+	
+	public String getFighterClass() {
+		return ((fclass == FighterClass.WARRIOR) ? "Warrior" : "Archer");
+	}
+	
+	public String getNation() {
+		return ((nation == Nation.NORMANS) ? "Norman" : (nation == Nation.SAXONS) ? "Saxon" : "Viking");
+	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public boolean isCreated() {
+		return isCreated;
+	}
+	
 	public void updateposition(int ix, int iy) {
 		this.x += ix;
 		this.y += iy;
 	}
 	
-	public enum FightingClass {
+	public enum FighterClass {
 		WARRIOR, ARCHER;
 	}
 	
 	public void build(int x, int y) {
+		this.x = x;
+		this.y = y;
+		
 		if (nation.equals(Nation.NORMANS)) {
 			buildnorman(x, y);
 		} else if (nation.equals(Nation.SAXONS)) {
@@ -46,6 +73,8 @@ public class Fighter {
 		} else if (nation.equals(Nation.VIKINGS)) {
 			buildviking(x, y);
 		}
+		
+		isCreated = true;
 	}
 	
 	private void buildnorman(int x, int y) {

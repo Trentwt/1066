@@ -3,9 +3,6 @@ package com.trippylizard.tensixtysix;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.opengl.GL11.*;
 
-import java.awt.EventQueue;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.*;
 import java.util.*;
 
@@ -17,8 +14,8 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.WaveData;
 import org.newdawn.slick.util.ResourceLoader;
 
-import com.apple.eawt.Application;
 import com.trippylizard.tensixtysix.fighter.Fighter;
+import com.trippylizard.tensixtysix.fighter.Fighter.FighterClass;
 import com.trippylizard.tensixtysix.models.*;
 import com.trippylizard.tensixtysix.nations.*;
 import com.trippylizard.tensixtysix.utils.StreamUtils;
@@ -34,6 +31,9 @@ public class Main {
 	boolean musicon = true;
 	
 	private static final List<Fighter> fighters = new ArrayList<Fighter>();
+	int fightercount = 0;
+	
+	int customnationsize = 6;
 	
 	public Main() {
 		try {
@@ -56,6 +56,12 @@ public class Main {
 		playMenuMusic();
 		
 		int trianglelist = glGenLists(1);
+		
+		for(int i = 0; i < customnationsize; i++){
+			fighters.add(new Fighter(Nation.NORMANS, fightercount++ + 1, FighterClass.WARRIOR, 1));
+			fighters.add(new Fighter(Nation.SAXONS, fightercount++ + 1, FighterClass.WARRIOR, 1));
+			fighters.add(new Fighter(Nation.VIKINGS, fightercount++ + 1, FighterClass.WARRIOR, 1));
+		}
 		
 		glNewList(trianglelist, GL_COMPILE);
 			glBegin(GL_TRIANGLES);
@@ -94,9 +100,7 @@ public class Main {
 			
 			if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
 				alDeleteBuffers(albuffer);
-				AL.destroy();
-				Display.destroy();
-				System.exit(0);
+				closeall();
 			}
 			
 			while (Keyboard.next()) {
@@ -115,7 +119,10 @@ public class Main {
 			
 			for (final Fighter f : fighters) {
 				Random gen = new Random();
-				f.build(gen.nextInt(), gen.nextInt());
+				if (!f.isCreated()) {
+					f.build(gen.nextInt(), gen.nextInt());
+					System.out.println(f.getNation() + " " + f.getFighterClass() + " has spawned at " + f.getX() + "," + f.getY() + " with the id " + f.getID());
+				}
 			}
 			
 			glCallList(trianglelist);
