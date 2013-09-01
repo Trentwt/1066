@@ -7,5 +7,4 @@ public class HumanFighter extends Fighter{
 	public HumanFighter(Nation nation, int id, FighterClass fclass, int level) {
 		super(nation, id, fclass, level);
 	}
-
 }

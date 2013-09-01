@@ -80,10 +80,10 @@ public class Fighter {
 	private void buildnorman(int x, int z) {
 		switch (fclass) {
 			case WARRIOR: {
-				
+				//Build code here
 			}
 			case ARCHER: {
-				
+				//Build code here
 			}
 		}
 	}
@@ -91,10 +91,10 @@ public class Fighter {
 	private void buildsaxon(int x, int y) {
 		switch (fclass) {
 			case WARRIOR: {
-				
+				//Build code here
 			}
 			case ARCHER: {
-				
+				//Build code here
 			}
 		}
 	}
@@ -102,10 +102,10 @@ public class Fighter {
 	private void buildviking(int x, int y) {
 		switch (fclass) {
 			case WARRIOR: {
-				
+				//Build code here
 			}
 			case ARCHER: {
-				
+				//Build code here
 			}
 		}
 	}
