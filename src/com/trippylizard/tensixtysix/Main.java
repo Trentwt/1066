@@ -8,7 +8,6 @@ import java.util.*;
 import java.util.logging.Logger;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.openal.*;
 import org.lwjgl.opengl.Display;
@@ -132,16 +131,15 @@ public class Main {
 			}
 			
 			for (final Fighter f : fighters) {
-				System.out.println("Reached for loop fighters");
 				if (!f.isCreated()) {
 					f.build(random((int) Math.floor(map.getMapLength()), 0), random((int) Math.floor(map.getMapWidth()), 0));
 					System.out.println(f.getNation() + " " + f.getFighterClass() + " has spawned at " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
 				} else {
-					int rand = random(4, 1);
-					if (rand == 1) {
-						boolean successful = false;
-						while (!successful) {
-							if (!(f.getX() + 1 > map.getMapLength())) {
+					boolean successful = false;
+					while (!successful) {
+						int rand = random(4, 1);
+						if (rand == 1) {
+							if (!(Math.floor(f.getX()) + 1 > map.getMapLength())) {
 								int pastx = f.getX();
 								int pastz = f.getZ();
 								
@@ -150,12 +148,8 @@ public class Main {
 								successful = true;
 								break;
 							}
-						}
-						successful = false;
-					} else if (rand == 2) {
-						boolean successful = false;
-						while (!successful) {
-							if (!(f.getX() - 1 < 0)) {
+						} else if (rand == 2) {
+							if (!(Math.floor(f.getX()) - 1 < 0)) {
 								int pastx = f.getX();
 								int pastz = f.getZ();
 								
@@ -164,12 +158,8 @@ public class Main {
 								successful = true;
 								break;
 							}
-						}
-						successful = false;
-					} else if (rand == 3) {
-						boolean successful = false;
-						while (!successful) {
-							if (!(f.getZ() + 1 > map.getMapWidth())) {
+						} else if (rand == 3) {
+							if (!(Math.floor(f.getZ()) + 1 > map.getMapWidth())) {
 								int pastx = f.getX();
 								int pastz = f.getZ();
 								
@@ -178,12 +168,8 @@ public class Main {
 								successful = true;
 								break;
 							}
-						}
-						successful = false;
-					} else if (rand == 4) {
-						boolean successful = false;
-						while (!successful) {
-							if (!(f.getZ() - 1 < 0)) {
+						} else if (rand == 4) {
+							if (!(Math.floor(f.getZ()) - 1 < 0)) {
 								int pastx = f.getX();
 								int pastz = f.getZ();
 								
@@ -192,7 +178,7 @@ public class Main {
 								successful = true;
 								break;
 							}
-					 	}
+						}
 						successful = false;
 					}
 				}
@@ -201,7 +187,7 @@ public class Main {
 			glCallList(trianglelist);
 			
 			Display.update();
-			Display.sync(60);
+			Display.sync(5);
 		}
 		
 		glDeleteLists(testObjectList, 1);
