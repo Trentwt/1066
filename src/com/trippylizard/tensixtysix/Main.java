@@ -39,6 +39,8 @@ public class Main {
 	@SuppressWarnings("unused")
 	private final static Logger logger = Logger.getLogger(Main.class.getName());
 	
+	Timer timer = new Timer();
+	
 	Map map;
 	
 	public Main() {
@@ -103,8 +105,11 @@ public class Main {
 			glEnd();
 		glEndList();
 		
-		
 		Normans.construct();
+		Saxons.construct();
+		Vikings.construct();
+		
+		timer.scheduleAtFixedRate(new ScheduledFighterMove(fighters, map), 5000, 5000);
 		
 		while (!Display.isCloseRequested()) {
 			//Render Code
@@ -134,53 +139,6 @@ public class Main {
 				if (!f.isCreated()) {
 					f.build(random((int) Math.floor(map.getMapLength()), 0), random((int) Math.floor(map.getMapWidth()), 0));
 					System.out.println(f.getNation() + " " + f.getFighterClass() + " has spawned at " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
-				} else {
-					boolean successful = false;
-					while (!successful) {
-						int rand = random(4, 1);
-						if (rand == 1) {
-							if (!(Math.floor(f.getX()) + 1 > map.getMapLength())) {
-								int pastx = f.getX();
-								int pastz = f.getZ();
-								
-								f.updateposition(1, 0);
-								System.out.println(f.getNation() + " " + f.getFighterClass() + " has moved from " + pastx + "," + pastz + " to " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
-								successful = true;
-								break;
-							}
-						} else if (rand == 2) {
-							if (!(Math.floor(f.getX()) - 1 < 0)) {
-								int pastx = f.getX();
-								int pastz = f.getZ();
-								
-								f.updateposition(-1, 0);
-								System.out.println(f.getNation() + " " + f.getFighterClass() + " has moved from " + pastx + "," + pastz + " to " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
-								successful = true;
-								break;
-							}
-						} else if (rand == 3) {
-							if (!(Math.floor(f.getZ()) + 1 > map.getMapWidth())) {
-								int pastx = f.getX();
-								int pastz = f.getZ();
-								
-								f.updateposition(0, 1);
-								System.out.println(f.getNation() + " " + f.getFighterClass() + " has moved from " + pastx + "," + pastz + " to " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
-								successful = true;
-								break;
-							}
-						} else if (rand == 4) {
-							if (!(Math.floor(f.getZ()) - 1 < 0)) {
-								int pastx = f.getX();
-								int pastz = f.getZ();
-								
-								f.updateposition(0, -1);
-								System.out.println(f.getNation() + " " + f.getFighterClass() + " has moved from " + pastx + "," + pastz + " to " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
-								successful = true;
-								break;
-							}
-						}
-						successful = false;
-					}
 				}
 			}
 			
@@ -220,7 +178,7 @@ public class Main {
 		System.exit(0);
 	}
 	
-	public int random(int max, int min) {
+	public static int random(int max, int min) {
 		return min + (int)(Math.random() * ((max - min) + 1));
 	}
 }
