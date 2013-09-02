@@ -22,12 +22,22 @@ public class Model {
 	}
 	
 	public double getMaxZ() {
-		List<Double> xposes = new ArrayList<Double>();
+		List<Double> zposes = new ArrayList<Double>();
 		
 		for (Vector3f v : vertices) {
-			xposes.add((double) v.getZ());
+			zposes.add((double) v.getZ());
 		}
 		
-		return Collections.max(xposes);
+		return Collections.max(zposes);
+	}
+
+	public double getMaxY() {
+		List<Double> yposes = new ArrayList<Double>();
+		
+		for (Vector3f v : vertices) {
+			yposes.add((double) v.getY());
+		}
+		
+		return Collections.max(yposes);
 	}
 }

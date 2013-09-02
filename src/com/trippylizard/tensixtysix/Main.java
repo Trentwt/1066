@@ -33,6 +33,8 @@ public class Main {
 	
 	private static final List<Fighter> fighters = new ArrayList<Fighter>();
 	
+	private static String mappath = "res/terrain.obj";
+	
 	@SuppressWarnings("unused")
 	private final static Logger logger = Logger.getLogger(Main.class.getName());
 	
@@ -40,7 +42,7 @@ public class Main {
 	
 	Map map;
 	
-	public Main() {
+	public Main() throws InterruptedException {
 		try {
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
 			Display.setTitle("1066 - Alpha Version 0.0.1");
@@ -56,14 +58,22 @@ public class Main {
 		glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 		
+		System.out.println(glGetString(GL_VERSION));
+		
 		try {
-			map = new Map(OBJModelLoader.loadModel(StreamUtils.streamToFile(ResourceLoader.getResourceAsStream("res/Car.obj"))));
+			System.out.println("Reading map file, this may take a while...");
+			System.out.println("WARNING: CPU usage spike will occur!");
+			long time = System.nanoTime();
+			map = new Map(OBJModelLoader.loadModel(StreamUtils.streamToFile(ResourceLoader.getResourceAsStream(mappath))));
+			time = System.nanoTime() - time;
+			System.out.println("Map Loaded: '" + mappath + "'! (" + time / 1000000 + " ms)");
+			System.out.println("Rounded Map Size: X=" + Math.rint(map.getMapWidth()) + " Y=" + Math.rint(map.getMapHeight()) + " Z=" + Math.rint(map.getMapLength()));
+			System.out.println();
+			Thread.sleep(2000);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			closeall();
 		}
-		
-		System.out.println(glGetString(GL_VERSION));
 		
 		playMenuMusic();
 		
@@ -151,7 +161,7 @@ public class Main {
 		closeall();
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		new Main();
 	}
 	

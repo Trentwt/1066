@@ -6,12 +6,15 @@ public class Map {
 
 	double width;
 	double length;
+	double height;
+	
 	Model model;
 	
 	public Map(Model model) {
 		this.model = model;
 		this.width = model.getMaxX();
 		this.length = model.getMaxZ();
+		this.height = model.getMaxY();
 	}
 	
 	public double getMapWidth() {
@@ -20,5 +23,9 @@ public class Map {
 	
 	public double getMapLength() {
 		return length;
+	}
+
+	public double getMapHeight() {
+		return height;
 	}
 }
