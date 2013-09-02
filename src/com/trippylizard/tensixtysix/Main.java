@@ -138,54 +138,45 @@ public class Main {
 					boolean successful = false;
 					while (!successful) {
 						int rand = random(4, 1);
-						switch (rand) {
-							case 1:
-							{
-								if (!(Math.floor(f.getX()) + 1 > map.getMapLength())) {
-									int pastx = f.getX();
-									int pastz = f.getZ();
+						if (rand == 1) {
+							if (!(Math.floor(f.getX()) + 1 > map.getMapLength())) {
+								int pastx = f.getX();
+								int pastz = f.getZ();
 								
-									f.updateposition(1, 0);
-									System.out.println(f.getNation() + " " + f.getFighterClass() + " has moved from " + pastx + "," + pastz + " to " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
-									successful = true;
-									break;
-								}
+								f.updateposition(1, 0);
+								System.out.println(f.getNation() + " " + f.getFighterClass() + " has moved from " + pastx + "," + pastz + " to " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
+								successful = true;
+								break;
 							}
-							case 2:
-							{
-								if (!(Math.floor(f.getX()) - 1 < 0)) {
-									int pastx = f.getX();
-									int pastz = f.getZ();
+						} else if (rand == 2) {
+							if (!(Math.floor(f.getX()) - 1 < 0)) {
+								int pastx = f.getX();
+								int pastz = f.getZ();
 								
-									f.updateposition(-1, 0);
-									System.out.println(f.getNation() + " " + f.getFighterClass() + " has moved from " + pastx + "," + pastz + " to " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
-									successful = true;
-									break;
-								}
+								f.updateposition(-1, 0);
+								System.out.println(f.getNation() + " " + f.getFighterClass() + " has moved from " + pastx + "," + pastz + " to " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
+								successful = true;
+								break;
 							}
-							case 3:
-							{
-								if (!(Math.floor(f.getZ()) + 1 > map.getMapWidth())) {
-									int pastx = f.getX();
-									int pastz = f.getZ();
+						} else if (rand == 3) {
+							if (!(Math.floor(f.getZ()) + 1 > map.getMapWidth())) {
+								int pastx = f.getX();
+								int pastz = f.getZ();
 								
-									f.updateposition(0, 1);
-									System.out.println(f.getNation() + " " + f.getFighterClass() + " has moved from " + pastx + "," + pastz + " to " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
-									successful = true;
-									break;
-								}
+								f.updateposition(0, 1);
+								System.out.println(f.getNation() + " " + f.getFighterClass() + " has moved from " + pastx + "," + pastz + " to " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
+								successful = true;
+								break;
 							}
-							case 4:
-							{
-								if (!(Math.floor(f.getZ()) - 1 < 0)) {
-									int pastx = f.getX();
-									int pastz = f.getZ();
+						} else if (rand == 4) {
+							if (!(Math.floor(f.getZ()) - 1 < 0)) {
+								int pastx = f.getX();
+								int pastz = f.getZ();
 								
-									f.updateposition(0, -1);
-									System.out.println(f.getNation() + " " + f.getFighterClass() + " has moved from " + pastx + "," + pastz + " to " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
-									successful = true;
-									break;
-								}
+								f.updateposition(0, -1);
+								System.out.println(f.getNation() + " " + f.getFighterClass() + " has moved from " + pastx + "," + pastz + " to " + f.getX() + "," + f.getZ() + " with the id " + f.getID() + ".");
+								successful = true;
+								break;
 							}
 						}
 						successful = false;
