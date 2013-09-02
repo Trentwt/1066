@@ -187,7 +187,7 @@ public class Main {
 			glCallList(trianglelist);
 			
 			Display.update();
-			Display.sync(5);
+			Display.sync(60);
 		}
 		
 		glDeleteLists(testObjectList, 1);
