@@ -15,26 +15,23 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.WaveData;
 import org.newdawn.slick.util.ResourceLoader;
 
-import com.trippylizard.tensixtysix.fighter.Fighter;
-import com.trippylizard.tensixtysix.fighter.Fighter.FighterClass;
+import com.trippylizard.tensixtysix.fighter.*;
 import com.trippylizard.tensixtysix.models.*;
 import com.trippylizard.tensixtysix.nations.*;
 import com.trippylizard.tensixtysix.utils.StreamUtils;
 
 public class Main {
 
-	int WIDTH = 1280;
-	int HEIGHT = 768;
+	private static int WIDTH = 1280;
+	private static int HEIGHT = 768;
+	private static int albuffer;
+	private static int menuthemesource;
+	private static int fightercount = 0;
+	private static int customnationsize = 6;
 	
-	int albuffer;
-	int menuthemesource;
-	
-	boolean musicon = true;
+	private static boolean musicon = true;
 	
 	private static final List<Fighter> fighters = new ArrayList<Fighter>();
-	int fightercount = 0;
-	
-	int customnationsize = 6;
 	
 	@SuppressWarnings("unused")
 	private final static Logger logger = Logger.getLogger(Main.class.getName());
@@ -172,7 +169,7 @@ public class Main {
 		alSourcePlay(menuthemesource);
 	}
 	
-	private void closeall() {
+	private static void closeall() {
 		AL.destroy();
 		Display.destroy();
 		System.exit(0);

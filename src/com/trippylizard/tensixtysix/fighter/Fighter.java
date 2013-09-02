@@ -1,6 +1,7 @@
 package com.trippylizard.tensixtysix.fighter;
 
 import com.trippylizard.tensixtysix.nations.Nation;
+import static com.trippylizard.tensixtysix.fighter.FighterClass.*;
 
 public class Fighter {
 	
@@ -8,6 +9,8 @@ public class Fighter {
 	int id;
 	FighterClass fclass;
 	int level;
+	
+	double health = 20;
 	
 	boolean isCreated = false;
 	
@@ -34,11 +37,15 @@ public class Fighter {
 	}
 	
 	public String getFighterClass() {
-		return ((fclass == FighterClass.WARRIOR) ? "Warrior" : "Archer");
+		return ((fclass == FighterClass.WARRIOR) ? "Warrior" : "General");
 	}
 	
 	public String getNation() {
 		return ((nation == Nation.NORMANS) ? "Norman" : (nation == Nation.SAXONS) ? "Saxon" : "Viking");
+	}
+	
+	public Weapon getWeapon() {
+		return Weapon.SWORD;
 	}
 	
 	public int getX() {
@@ -58,10 +65,6 @@ public class Fighter {
 		this.z += iz;
 	}
 	
-	public enum FighterClass {
-		WARRIOR, ARCHER;
-	}
-	
 	public void build(int x, int z) {
 		this.x = x;
 		this.z = z;
@@ -78,35 +81,34 @@ public class Fighter {
 	}
 	
 	private void buildnorman(int x, int z) {
-		switch (fclass) {
-			case WARRIOR: {
-				//Build code here
-			}
-			case ARCHER: {
-				//Build code here
-			}
+		if (fclass == WARRIOR) {
+			//Build code here
+		} else if (fclass == GENERAL) {
+			//Build code here
 		}
 	}
 	
 	private void buildsaxon(int x, int y) {
-		switch (fclass) {
-			case WARRIOR: {
-				//Build code here
-			}
-			case ARCHER: {
-				//Build code here
-			}
+		if (fclass == WARRIOR) {
+			//Build code here
+		} else if (fclass == GENERAL) {
+			//Build code here
 		}
 	}
 
 	private void buildviking(int x, int y) {
-		switch (fclass) {
-			case WARRIOR: {
-				//Build code here
-			}
-			case ARCHER: {
-				//Build code here
-			}
+		if (fclass == WARRIOR) {
+			//Build code here
+		} else if (fclass == GENERAL) {
+			//Build code here
 		}
+	}
+	
+	public void setHealth(double health) {
+		this.health = health;
+	}
+	
+	public double getHealth() {
+		return health;
 	}
 }
