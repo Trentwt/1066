@@ -28,4 +28,8 @@ public class Map {
 	public double getMapHeight() {
 		return height;
 	}
+	
+	public Model getModel() {
+		return model;
+	}
 }

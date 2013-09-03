@@ -1,8 +1,8 @@
 package com.trippylizard.tensixtysix.nations;
 
-import java.awt.Color;
-
 import org.newdawn.slick.opengl.Texture;
+
+import com.trippylizard.tensixtysix.utils.Color;
 
 public class Nation {
 	
@@ -20,5 +20,17 @@ public class Nation {
 		this.description = description;
 		this.color = color;
 		this.flag = flag;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public Color getColor() {
+		return color;
 	}
 }

@@ -33,7 +33,9 @@ public class Main {
 	
 	private static final List<Fighter> fighters = new ArrayList<Fighter>();
 	
-	private static String mappath = "res/terrain.obj";
+	private static final String MAPPATH_DEFAULT = "res/terrain.obj";
+	private static final String MAPPATH_CAR = "res/car.obj";
+	private static final String MAPPATH_MONKEY = "res/OpenGL Monkey.obj";
 	
 	@SuppressWarnings("unused")
 	private final static Logger logger = Logger.getLogger(Main.class.getName());
@@ -42,7 +44,7 @@ public class Main {
 	
 	Map map;
 	
-	public Main() throws InterruptedException {
+	public Main() throws InterruptedException, IOException {
 		try {
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
 			Display.setTitle("1066 - Alpha Version 0.0.1");
@@ -61,15 +63,7 @@ public class Main {
 		System.out.println(glGetString(GL_VERSION));
 		
 		try {
-			System.out.println("Reading map file, this may take a while...");
-			System.out.println("WARNING: CPU usage spike will occur!");
-			long time = System.nanoTime();
-			map = new Map(OBJModelLoader.loadModel(StreamUtils.streamToFile(ResourceLoader.getResourceAsStream(mappath))));
-			time = System.nanoTime() - time;
-			System.out.println("Map Loaded: '" + mappath + "'! (" + time / 1000000 + " ms)");
-			System.out.println("Rounded Map Size: X=" + Math.rint(map.getMapWidth()) + " Y=" + Math.rint(map.getMapHeight()) + " Z=" + Math.rint(map.getMapLength()));
-			System.out.println();
-			Thread.sleep(2000);
+			switchMap(MAPPATH_DEFAULT);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			closeall();
@@ -79,11 +73,7 @@ public class Main {
 		
 		int trianglelist = glGenLists(1);
 		
-		for(int i = 0; i < customnationsize; i++) {
-			fighters.add(new Fighter(Nation.NORMANS, (fightercount++) + 1, FighterClass.WARRIOR, 1));
-			fighters.add(new Fighter(Nation.SAXONS, (fightercount++) + 1, FighterClass.WARRIOR, 1));
-			fighters.add(new Fighter(Nation.VIKINGS, (fightercount++) + 1, FighterClass.WARRIOR, 1));
-		}
+		spawnfighters();
 		
 		glNewList(trianglelist, GL_COMPILE);
 			glBegin(GL_TRIANGLES);
@@ -139,6 +129,30 @@ public class Main {
 							musicon = true;
 						}
 					}
+				} else if (Keyboard.isKeyDown(Keyboard.KEY_1)) {
+					timer.cancel();
+					timer = new Timer();
+					fighters.clear();
+					fightercount = 0;
+					switchMap(MAPPATH_DEFAULT);
+					spawnfighters();
+					timer.scheduleAtFixedRate(new ScheduledFighterMove(fighters, map), 5000, 5000);
+				} else if (Keyboard.isKeyDown(Keyboard.KEY_2)) {
+					timer.cancel();
+					timer = new Timer();
+					fighters.clear();
+					fightercount = 0;
+					switchMap(MAPPATH_CAR);
+					spawnfighters();
+					timer.scheduleAtFixedRate(new ScheduledFighterMove(fighters, map), 5000, 5000);
+				} else if (Keyboard.isKeyDown(Keyboard.KEY_3)) {
+					timer.cancel();
+					timer = new Timer();
+					fighters.clear();
+					fightercount = 0;
+					switchMap(MAPPATH_MONKEY);
+					spawnfighters();
+					timer.scheduleAtFixedRate(new ScheduledFighterMove(fighters, map), 5000, 5000);
 				}
 			}
 			
@@ -161,7 +175,7 @@ public class Main {
 		closeall();
 	}
 	
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		new Main();
 	}
 	
@@ -187,5 +201,25 @@ public class Main {
 	
 	public static int random(int max, int min) {
 		return min + (int)(Math.random() * ((max - min) + 1));
+	}
+	
+	private void switchMap(String path) throws IOException {
+		System.out.println();
+		System.out.println("Reading map file, this may take a while...");
+		System.out.println("WARNING: CPU usage spike will occur!");
+		long time = System.nanoTime();
+		map = new Map(OBJModelLoader.loadModel(StreamUtils.streamToFile(ResourceLoader.getResourceAsStream(path))));
+		time = System.nanoTime() - time;
+		System.out.println("Map Loaded: '" + path + "'! (" + time / 1000000 + " ms)");
+		System.out.println("Rounded Map Size: X=" + Math.rint(map.getMapWidth()) + " Y=" + Math.rint(map.getMapHeight()) + " Z=" + Math.rint(map.getMapLength()));
+		System.out.println();
+	}
+	
+	private void spawnfighters() {
+		for(int i = 0; i < customnationsize; i++) {
+			fighters.add(new Fighter(Nation.NORMANS, (fightercount++) + 1, FighterClass.WARRIOR, 1));
+			fighters.add(new Fighter(Nation.SAXONS, (fightercount++) + 1, FighterClass.WARRIOR, 1));
+			fighters.add(new Fighter(Nation.VIKINGS, (fightercount++) + 1, FighterClass.WARRIOR, 1));
+		}
 	}
 }

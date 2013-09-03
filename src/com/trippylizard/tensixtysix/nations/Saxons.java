@@ -1,6 +1,5 @@
 package com.trippylizard.tensixtysix.nations;
 
-import java.awt.Color;
 import java.io.IOException;
 
 import org.lwjgl.openal.AL;
@@ -8,6 +7,8 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
+
+import com.trippylizard.tensixtysix.utils.Color;
 
 public class Saxons extends Nation {
 
@@ -27,7 +28,7 @@ public class Saxons extends Nation {
 	}
 	
 	public Saxons() {
-		super("Saxons", desc_saxons, Color.RED, flag);
+		super("Saxons", desc_saxons, new Color(220, 20, 60), flag);
 	}
 
 }
