@@ -1,4 +1,4 @@
-package com.trippylizard.tensixtysix.models;
+package com.trippylizard.tensixtysix.utils.models;
 
 import org.lwjgl.util.vector.Vector3f;
 

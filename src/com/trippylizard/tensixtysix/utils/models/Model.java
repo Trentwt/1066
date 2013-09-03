@@ -1,4 +1,4 @@
-package com.trippylizard.tensixtysix.models;
+package com.trippylizard.tensixtysix.utils.models;
 
 import java.util.ArrayList;
 import java.util.Collections;

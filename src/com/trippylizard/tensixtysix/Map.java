@@ -1,6 +1,6 @@
 package com.trippylizard.tensixtysix;
 
-import com.trippylizard.tensixtysix.models.Model;
+import com.trippylizard.tensixtysix.utils.models.Model;
 
 public class Map {
 

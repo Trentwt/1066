@@ -16,7 +16,7 @@ import org.lwjgl.util.WaveData;
 import org.newdawn.slick.util.ResourceLoader;
 
 import com.trippylizard.tensixtysix.fighter.*;
-import com.trippylizard.tensixtysix.models.*;
+import com.trippylizard.tensixtysix.utils.models.*;
 import com.trippylizard.tensixtysix.nations.*;
 import com.trippylizard.tensixtysix.utils.StreamUtils;
 

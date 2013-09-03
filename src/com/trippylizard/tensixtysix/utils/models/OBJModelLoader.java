@@ -1,4 +1,4 @@
-package com.trippylizard.tensixtysix.models;
+package com.trippylizard.tensixtysix.utils.models;
 
 import static org.lwjgl.opengl.GL11.glNormal3f;
 import static org.lwjgl.opengl.GL11.glVertex3f;
