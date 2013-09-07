@@ -7,6 +7,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * 
+ * Represents the class with some methods related to a FileStream.
+ * 
+ * @author Trent
+ *
+ */
+
 public class StreamUtils {
     public static File streamToFile (InputStream in) throws IOException {
         File tempfile = File.createTempFile("streamtofile", ".tmp");

@@ -2,6 +2,12 @@ package com.trippylizard.tensixtysix;
 
 import com.trippylizard.tensixtysix.utils.models.Model;
 
+/**
+ * Represents a 1066 Map used to store data such as the map width, length or height and is constructed using the Model class to initialize the map.
+ * 
+ * @author Trent
+ */
+
 public class Map {
 
 	double width;

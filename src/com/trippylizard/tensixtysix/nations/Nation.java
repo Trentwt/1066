@@ -4,6 +4,15 @@ import org.newdawn.slick.opengl.Texture;
 
 import com.trippylizard.tensixtysix.utils.Color;
 
+/**
+ * 
+ * Represents the superclass that is used to define the different Nations (Normans, Saxons and Vikings).
+ * These different Nations are used to identify the nationalities of the fighters, and also are used to add the model of how the fighter is rendered based on the nation.
+ * 
+ * @author Trent
+ *
+ */
+
 public class Nation {
 	
 	public static Nation NORMANS = Normans.construct();

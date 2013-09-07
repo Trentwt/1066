@@ -3,6 +3,15 @@ package com.trippylizard.tensixtysix.fighter;
 import com.trippylizard.tensixtysix.nations.Nation;
 import static com.trippylizard.tensixtysix.fighter.FighterClass.*;
 
+/**
+ * 
+ * Represents a general fighters used as a superclass for the subclasses HumanFighter and AIFighter.
+ * This class is not actually initialized in the final release except in subclasses.
+ * 
+ * @author Trent
+ *
+ */
+
 public class Fighter {
 	
 	Nation nation;

@@ -10,6 +10,14 @@ import org.newdawn.slick.util.ResourceLoader;
 
 import com.trippylizard.tensixtysix.utils.Color;
 
+/**
+ * 
+ * Represents the Normans Nation.
+ * 
+ * @author Trent
+ *
+ */
+
 public class Normans extends Nation {
 
 	private static String desc_normans = "insert norman poetry here :D";

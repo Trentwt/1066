@@ -5,6 +5,13 @@ import java.util.TimerTask;
 
 import com.trippylizard.tensixtysix.fighter.Fighter;
 
+/**
+ * Represents the TimerTask responsible for timing the fighter move events.
+ * 
+ * @author Trent
+ *
+ */
+
 public class ScheduledFighterMove extends TimerTask {
 
 	List<Fighter> fighters;

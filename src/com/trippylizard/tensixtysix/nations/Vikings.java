@@ -10,6 +10,14 @@ import org.newdawn.slick.util.ResourceLoader;
 
 import com.trippylizard.tensixtysix.utils.Color;
 
+/**
+ * 
+ * Represents the Vikings Nation.
+ * 
+ * @author Trent
+ *
+ */
+
 public class Vikings extends Nation {
 
 	private static String desc_vikings = "insert viking poetry here :D";

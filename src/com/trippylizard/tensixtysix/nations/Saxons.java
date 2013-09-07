@@ -10,6 +10,14 @@ import org.newdawn.slick.util.ResourceLoader;
 
 import com.trippylizard.tensixtysix.utils.Color;
 
+/**
+ * 
+ * Represents the Saxons Nation.
+ * 
+ * @author Trent
+ *
+ */
+
 public class Saxons extends Nation {
 
 	private static String desc_saxons = "insert saxon poetry here :D";

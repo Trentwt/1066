@@ -1,5 +1,13 @@
 package com.trippylizard.tensixtysix.utils;
 
+/**
+ * 
+ * Represents the ANSI Colour codes used to make coloured text.
+ *  
+ * @author Trent
+ *
+ */
+
 public class ANSIColours {
 	public static final String RESET = "\u001B[0m";
 	public static final String BLACK = "\u001B[30m";

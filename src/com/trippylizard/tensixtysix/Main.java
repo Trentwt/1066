@@ -21,6 +21,16 @@ import com.trippylizard.tensixtysix.nations.*;
 import com.trippylizard.tensixtysix.utils.ANSIColours;
 import com.trippylizard.tensixtysix.utils.StreamUtils;
 
+/**
+ * 
+ * The 1066 Main Class responisble for the initialization of the display, OpenAL Devices and OpenGL Rendering.
+ * Maintains global variables and registers synchronous tasks such as the ScheduledFighterMove task.
+ * Also maintains methods for various operations in the class, although global methods are usually stated in the com.trippylizard.tensixtysix.utils package.
+ * 
+ * @author Trent
+ *
+ */
+
 public class Main {
 
 	private static int WIDTH = 1280;
