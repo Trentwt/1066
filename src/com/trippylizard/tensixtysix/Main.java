@@ -18,6 +18,7 @@ import org.newdawn.slick.util.ResourceLoader;
 import com.trippylizard.tensixtysix.fighter.*;
 import com.trippylizard.tensixtysix.utils.models.*;
 import com.trippylizard.tensixtysix.nations.*;
+import com.trippylizard.tensixtysix.utils.ANSIColours;
 import com.trippylizard.tensixtysix.utils.StreamUtils;
 
 public class Main {
@@ -63,15 +64,19 @@ public class Main {
 		System.out.println(glGetString(GL_VERSION));
 		
 		try {
-			switchMap(MAPPATH_DEFAULT);
+			switchMap(MAPPATH_CAR);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			closeall();
 		}
 		
+		System.out.println("Starting Menu Music...");
+		
 		playMenuMusic();
 		
 		int trianglelist = glGenLists(1);
+		
+		System.out.println("Spawning fighters...");
 		
 		spawnfighters();
 		
@@ -101,6 +106,9 @@ public class Main {
 				OBJModelLoader.renderModel(m);
 			glEnd();
 		glEndList();
+		
+		System.out.println("Calling Fighter Constructors...");
+		System.out.println();
 		
 		Normans.construct();
 		Saxons.construct();
@@ -203,16 +211,17 @@ public class Main {
 		return min + (int)(Math.random() * ((max - min) + 1));
 	}
 	
-	private void switchMap(String path) throws IOException {
+	private void switchMap(String path) throws IOException, InterruptedException {
 		System.out.println();
 		System.out.println("Reading map file, this may take a while...");
-		System.out.println("WARNING: CPU usage spike will occur!");
+		System.out.println(ANSIColours.RED + "WARNING" + ANSIColours.RESET + ": CPU usage spike will occur!");
 		long time = System.nanoTime();
 		map = new Map(OBJModelLoader.loadModel(StreamUtils.streamToFile(ResourceLoader.getResourceAsStream(path))));
 		time = System.nanoTime() - time;
-		System.out.println("Map Loaded: '" + path + "'! (" + time / 1000000 + " ms)");
+		System.out.println(ANSIColours.GREEN + "Map Loaded: '" + path + "'! " + ANSIColours.RESET + "(" + time / 1000000 + " ms)");
 		System.out.println("Rounded Map Size: X=" + Math.rint(map.getMapWidth()) + " Y=" + Math.rint(map.getMapHeight()) + " Z=" + Math.rint(map.getMapLength()));
 		System.out.println();
+		Thread.sleep(4000);
 	}
 	
 	private void spawnfighters() {
