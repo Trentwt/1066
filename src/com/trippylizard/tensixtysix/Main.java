@@ -23,7 +23,7 @@ import com.trippylizard.tensixtysix.utils.StreamUtils;
 
 /**
  * 
- * The 1066 Main Class responisble for the initialization of the display, OpenAL Devices and OpenGL Rendering.
+ * The 1066 Main Class is responsible for the initialization of the display, OpenAL Devices and OpenGL Rendering.
  * Maintains global variables and registers synchronous tasks such as the ScheduledFighterMove task.
  * Also maintains methods for various operations in the class, although global methods are usually stated in the com.trippylizard.tensixtysix.utils package.
  * 
@@ -74,7 +74,7 @@ public class Main {
 		System.out.println(glGetString(GL_VERSION));
 		
 		try {
-			switchMap(MAPPATH_CAR);
+			switchMap(MAPPATH_DEFAULT);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			closeall();
